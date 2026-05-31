@@ -6,6 +6,7 @@ function getBeijingDate() {
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('CDN-Cache-Control', 'no-store');
   res.setHeader('Pragma', 'no-cache');
   const { date } = req.query;
   const today = date || getBeijingDate();
