@@ -1,3 +1,9 @@
+function getBeijingDate() {
+  const now = new Date();
+  const beijing = new Date(now.getTime() + 8 * 60 * 60 * 1000);
+  return { date: beijing.toISOString().slice(0, 10), time: beijing.toISOString() };
+}
+
 export default async function handler(req, res) {
   const { app } = req.query;
 
@@ -12,8 +18,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'KV not configured' });
   }
 
-  const now = new Date().toISOString();
-  const today = now.slice(0, 10);
+  const { date: today, time: now } = getBeijingDate();
   const key = `screentime:${today}`;
 
   try {
