@@ -1,6 +1,12 @@
+function getBeijingDate() {
+  const now = new Date();
+  const beijing = new Date(now.getTime() + 8 * 60 * 60 * 1000);
+  return beijing.toISOString().slice(0, 10);
+}
+
 export default async function handler(req, res) {
   const { date } = req.query;
-  const today = date || new Date().toISOString().slice(0, 10);
+  const today = date || getBeijingDate();
   const key = `screentime:${today}`;
 
   const KV_URL = process.env.KV_REST_API_URL;
